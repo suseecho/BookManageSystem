@@ -7,6 +7,8 @@ class Book
 {
 public:
     Book(std::string name , std::string id, double price , std::string author , bool exist , std::string reader_id);
+    //从文件获取
+    void init();
     //获取图书名称
     std::string getName();
     //获取图书编号
@@ -39,11 +41,11 @@ private:
     //图书的作者
     std::string m_author;
     //图书在库数量
-    unsigned int   m_status;
+    unsigned int m_status;
     //借书人的id，如果没有，默认为Null
-    std::vector<std::string> m_readerids;
+    std::vector<std::string> m_reader_ids;
     //图书的数量
-    unsigned  m_num;
+    unsigned int m_num;
 };
 
 #endif // BOOK_H

@@ -2,14 +2,10 @@
 Book::Book(std::string name, std::string id, double price,std::string author, bool exist,std::string reader_id)
 {
    this->m_name        =   name;
-   this-> m_id         =   id;   
+   this->m_id          =   id;   
    this->m_price       =   price;
    this->m_author      =   author;
    this->m_status      =   exist;
-   this->m_reader_ids  =   reader_ids;
-}
-Book::~Book()
-{
 }
 
 std::string Book::getName()
@@ -39,7 +35,7 @@ bool Book::isExist()
 
 std::vector<std::string> & Book::getReaderIds()
 {
-    return this->m_readerids;
+    return this->m_reader_ids;
 }
 
 void Book::setNum(int change)
@@ -60,12 +56,12 @@ void Book::setStatus(int change)
     this->m_status += change;
 }
 
-unsigned int getNum()
+unsigned int Book::getNum()
 {
     return this->m_num;
 }
 
-unsigned int getStatus()
+unsigned int Book::getStatus()
 {
     return this->m_status;
 }

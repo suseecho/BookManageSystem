@@ -6,7 +6,7 @@ Admin::Admin(std::string id,std::string passwd)
     this->m_passwd      =     passwd;
 }
 
-void Admin::input(Book book,vector<Book> & books)
+void Admin::input(Book book,std::vector<Book> & books)
 {
     books.push_back(book);
 }
@@ -35,7 +35,7 @@ void Admin::deleteReader(std::string readerId, std::vector<Reader> & readers)
             return;
         }
     }
-    std::out<<"对不起，找不到这位读者，删除失败！"<<std::endl;
+    std::cout<<"对不起，找不到这位读者，删除失败！"<<std::endl;
 }
 
 void Admin::retBook(std::string bookId,std::vector<Book> & books)
@@ -70,7 +70,7 @@ void lendBook(std::string reader_name,std::vector<Reader> readers,std::string bo
     for(std::vector<Reader>::iterator it = readers.begin(); it != readers.end(); it++){
         if(reader_name == it->getName()){
             std::vector<std::string> & temp = it->getRecord();
-            for(std::vector<Book>::iterator it2 = temp.begin(); it2 != temp.end(); it2++){
+            for(std::vector<std::string>::iterator it2 = temp.begin(); it2 != temp.end(); it2++){
                 if(*it2 == bookId){
                     temp.erase(it2);
                     return;

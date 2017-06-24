@@ -2,7 +2,7 @@
 #define ROOT_H
 #include "Admin.h"
 
-class Root::public Admin
+class Root:public Admin
 {
 private:
     std::string m_id;
