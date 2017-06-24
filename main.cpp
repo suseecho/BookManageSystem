@@ -1,8 +1,16 @@
-#include "../include/Root.h"
-#include <iostream>
+#include<iostream>
+#include<string>
+#include"./include/Admin.h"
+#include"./include/Book.h"
+#include"./include/Root.h"
+#include"./include/Reader.h"
 
-int main(int argc,char argv)
+using namespace std;
+
+int main()
 {
-    std::cout<<"Hello World"<<std::endl;
+    cout << "           ***********************************************\n";
+    cout << "           **              Book Manage System           **\n";
+    cout << "           **      1.  input information                **\n";
     return 0;
 }
