@@ -1,9 +1,11 @@
-#ifdef READER_H
+#ifndef READER_H
 #define READER_H
+
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <vector>
+
 class Reader
 {
 private:
@@ -12,7 +14,7 @@ private:
     //读者性别，男性为true，女性为false
     bool                        m_gender;
     //读者学号
-    std::vector<std::string>    m_id;
+    std::string    m_id;
     //读者已借书籍
     std::vector<std::string>    m_record;
 public:
