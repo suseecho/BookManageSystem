@@ -17,7 +17,7 @@ std::string Book::getName()
     return this->m_name;
 }
 
-std::vector<std::string> Book::getId()
+std::string Book::getId()
 {
     return this->m_id;
 }

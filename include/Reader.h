@@ -26,8 +26,11 @@ public:
     bool getGender();
     //获取读者学号
     std::string getId();
-    //获取
-    
+    //获取已接书籍名称
+    std::vector<std::string> & getRecord()
+    {
+        return m_record;
+    }
     //友元函数 重载 << >>
     //friend std::ostream & operator<< (std::ostream &out, Reader & reader);
     //friend std::istream & operator>> (std::istream &in, Reader &reader);

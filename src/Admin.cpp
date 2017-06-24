@@ -19,7 +19,7 @@ void Admin::logon(Reader reader,std::vector<Reader> & readers)
 void Admin::deleteBook(std::string bookId,std::vector<Book> & books)
 {
     for(std::vector<Book>::iterator it = books.begin(); it != books.end(); it++){
-        if(it->getId() == book){
+        if(it->getId() == bookId){
             books.erase(it);
             return;
         }
@@ -30,7 +30,7 @@ void Admin::deleteBook(std::string bookId,std::vector<Book> & books)
 void Admin::deleteReader(std::string readerId, std::vector<Reader> & readers)
 {
     for(std::vector<Reader>::iterator it = readers.begin(); it != readers.end(); it++){
-        if( it->getId() == reader ){
+        if( it->getId() == readerId ){
             readers.erase(it);
             return;
         }
@@ -69,7 +69,7 @@ void lendBook(std::string reader_name,std::vector<Reader> readers,std::string bo
     }
     for(std::vector<Reader>::iterator it = readers.begin(); it != readers.end(); it++){
         if(reader_name == it->getName()){
-            std::vector<std::string> & temp = it->getBookIds();
+            std::vector<std::string> & temp = it->getRecord();
             for(std::vector<Book>::iterator it2 = temp.begin(); it2 != temp.end(); it2++){
                 if(*it2 == bookId){
                     temp.erase(it2);
