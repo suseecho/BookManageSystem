@@ -147,22 +147,52 @@ void query()
     if(flag == 0)
     {
         std::cout << "未找到相关书籍" << std::endl;
+        BRK();
     }
     BRK();
 }
 
 void mydelete()
 {
+    int flag = 0;
     std::cout << "输入要删除图书的编号:";
     std::string t_id;
     std::cin >> t_id;
     BMSopt * ptr = BMSopt::Instance();
-    ptr->deleteBook(t_id);
+    std::map<std::string,Book> &mapBook = ptr->getBooks();
+    auto it = mapBook.begin();
+    while(it!=mapBook.end())
+    {
+        if(it->second.getId() == t_id)
+        {
+            ptr->deleteBook(t_id);
+            flag = 1;
+            BRK();
+            break;
+        }
+        it++;
+    }
+    if(flag == 0)
+    {
+        std::cout << "未找到想要删除的书籍" << std::endl;
+        BRK();
+    }
 }
+
 
 void logon()
 {
-    std::cout << "logon" << std::endl;
+    std::cout << "请输入读者姓名,性别,编号" << std::endl;
+    std::string name , id;
+    bool gender; 
+    std::cin >> name >> gender >> id;
+    Reader reader(name,gender,id);
+    BMSopt * ptr = BMSopt::Instance();
+    ptr->addReader(reader);
+    std::cout << "注册成功" << std::endl;
+    BRK();
+    BRK();
+    
 }
 
 void borrow()
