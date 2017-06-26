@@ -181,3 +181,13 @@ void BMSopt::addReader(Reader reader)
     this->readersToFile();
 }
 
+void BMSopt::setOperator(std::string user)
+{
+    this->m_operator = user;
+}
+
+std::string BMSopt::getOperator()
+{
+    return this->m_operator;
+}
+

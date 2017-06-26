@@ -37,10 +37,14 @@ class BMSopt
         void addBook(Book book);
         //注册读者
         void addReader(Reader reader);
+        //设置当前操作人员
+        void setOperator(std::string user);
+        //得到当前操作人员
+        std::string getOperator();
 
     private:
         //当前操作人员
-        std::string                    m_perator;
+        std::string                    m_operator;
         BMSopt();
         //唯一的对象的指针
         static BMSopt                  * instance_;
