@@ -1,4 +1,6 @@
 #include "./include/BMSopt.h"
+#include<unistd.h>
+#define BRK()  do { ; getchar(); } while (0)
 void menu();
 void input();
 void mydelete();
@@ -11,6 +13,7 @@ int main()
     BMSopt * ptr = BMSopt::Instance();
     std::map<std::string,Admin> & mapAdmin =  ptr->getAdmins();
     std::string user,pwd;
+    system("clear");
     std::cout << "login, please" << std::endl;
     std::cout << "user: ";
     std::cin >> user;
@@ -72,7 +75,6 @@ void menu()
     std::cout << "你想要干什么: ";
     std::cin >> ch;
     std::cout <<  ch <<  std::endl;
-//    system("pause");
     switch(ch)
     {
         case '1':
@@ -120,17 +122,42 @@ void query()
     BMSopt * ptr = BMSopt::Instance();
     std::map<std::string,Book> &mapBook = ptr->getBooks();
     auto it = mapBook.begin();
+
+    int flag = 0;
     while(it!=mapBook.end())
     {
         if(it->second.getId() == id)
         {
-             
-    
+            std::cout << "图书名称: ";
+            std::cout << it->second.getName() << std::endl;
+            std::cout << "图书编号: ";
+            std::cout << it->second.getId() << std::endl;
+            std::cout << "图书价格: ";
+            std::cout << it->second.getPrice() << std::endl;
+            std::cout << "图书作者: ";
+            std::cout << it->second.getAuthor() << std::endl;
+            std::cout << "库存量: ";
+            std::cout << it->second.getNum() << std::endl;
+            flag = 1;
+            BRK();
+            break;
+        }
+        it++;
+    }             
+    if(flag == 0)
+    {
+        std::cout << "未找到相关书籍" << std::endl;
+    }
+    BRK();
 }
 
 void mydelete()
 {
-    std::cout << "mydelete" << std::endl;
+    std::cout << "输入要删除图书的编号:";
+    std::string t_id;
+    std::cin >> t_id;
+    BMSopt * ptr = BMSopt::Instance();
+    ptr->deleteBook(t_id);
 }
 
 void logon()
