@@ -1,25 +1,38 @@
 #include "../include/Admin.h"
 
+Admin::Admin()
+{
+    Admin("","");
+}
+
 Admin::Admin(std::string id,std::string passwd)
 {
     this->m_id          =     id;
     this->m_passwd      =     passwd;
 }
 
-void Admin::input(Book book,std::vector<Book> & books)
+void Admin::input(Book book,std::map<std::string,Book> & books)
 {
-    books.push_back(book);
+    auto it = books.find(book.getId());
+    if(it != books.end()){
+        (it->second).setNum(book.getNum());
+        (it->second).setStatus(book.getNum());
+    }else{
+        books[book.getId()] = book;
+    }
 }
 
-void Admin::logon(Reader reader,std::vector<Reader> & readers)
+void Admin::logon(Reader reader,std::map<std::string,Reader> & readers)
 {
-    readers.push_back(reader);
+    auto it = readers.find(reader.getId());
+    if(it == readers.end())
+        readers[reader.getId()] = reader;
 }
 
-void Admin::deleteBook(std::string bookId,std::vector<Book> & books)
+void Admin::deleteBook(std::string bookId,std::map<std::string,Book> & books)
 {
-    for(std::vector<Book>::iterator it = books.begin(); it != books.end(); it++){
-        if(it->getId() == bookId){
+    for(auto it = books.begin(); it != books.end(); it++){
+        if(it->first == bookId){
             books.erase(it);
             return;
         }
@@ -27,10 +40,10 @@ void Admin::deleteBook(std::string bookId,std::vector<Book> & books)
     std::cout<<"对不起，找不到这本书，删除失败！"<<std::endl;
 }
 
-void Admin::deleteReader(std::string readerId, std::vector<Reader> & readers)
+void Admin::deleteReader(std::string readerId, std::map<std::string,Reader> & readers)
 {
-    for(std::vector<Reader>::iterator it = readers.begin(); it != readers.end(); it++){
-        if( it->getId() == readerId ){
+    for(auto it = readers.begin(); it != readers.end(); it++){
+        if( it->first == readerId ){
             readers.erase(it);
             return;
         }
@@ -46,7 +59,7 @@ void Admin::retBook(std::string bookId,std::vector<Book> & books)
             {
                 std::cout<<"书本库存不够，借出失败！"<<std::endl;
                 return;
-            } 
+            }
             it->setStatus(-1);
             return;
         }
@@ -78,4 +91,22 @@ void lendBook(std::string reader_name,std::vector<Reader> readers,std::string bo
             }
         }
     }
+}
+
+std::string Admin::getId()
+{
+    return this->m_id;
+}
+
+bool Admin::login(std::string passwd)
+{
+    bool b = true;
+    if(this->m_passwd != passwd)
+        b = false;
+    return b;
+}
+
+std::string Admin::getPasswd()
+{
+    return this->m_passwd;
 }

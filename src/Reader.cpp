@@ -1,11 +1,15 @@
 #include "../include/Reader.h"
 
+Reader::Reader()
+{
+
+}
+
 Reader::Reader(std::string name,bool gender,std::string id)
 {
     this->m_name   =   name;
     this->m_gender =   gender;
     this->m_id     =   id;
-    init();
 }
 
 bool Reader::init()
@@ -14,6 +18,7 @@ bool Reader::init()
     std::string filename = this->m_name + ".dat";
     std::ifstream in(filename,std::ios::binary);
     if(!in){
+        b = false;
         return b;
     }
     m_record.clear();

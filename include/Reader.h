@@ -1,11 +1,11 @@
 #ifndef READER_H
 #define READER_H
-
+#include <map>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <vector>
-
+#include <cstdlib>
 class Reader
 {
 private:
@@ -18,7 +18,7 @@ private:
     //读者已借书籍
     std::vector<std::string>    m_record;
 public:
-
+    Reader();
     Reader(std::string name,bool gender,std::string id);
     //init()函数用于从文件读取信息初始化读者的m_record成员，返回值为bool，如果成功返回true，失败则返回false
     bool init();
@@ -31,6 +31,7 @@ public:
     //获取已接书籍名称
     std::vector<std::string> & getRecord()
     {
+        this->init();
         return m_record;
     }
     //友元函数 重载 << >>

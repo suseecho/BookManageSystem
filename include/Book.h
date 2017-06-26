@@ -6,7 +6,8 @@
 class Book
 {
 public:
-    Book(std::string name , std::string id, double price , std::string author , bool exist , std::string reader_id);
+    Book(std::string name , std::string id, double price , std::string author , unsigned int num,unsigned int status);
+    Book();
     //从文件获取
     void init();
     //获取图书名称
@@ -28,24 +29,24 @@ public:
     //设置图书的在库数量
     void setStatus(int change);
     //获取图书的数量
-    unsigned int getNum();
+    int getNum();
     //获取图书的在库数量
-    unsigned int getStatus();
+    int getStatus();
 private:
     //图书名称
     std::string m_name;
     //图书编号
     std::string m_id;
     //图书的单价，注意小数位数
-    double m_price; 
+    double m_price;
     //图书的作者
     std::string m_author;
     //图书在库数量
-    unsigned int m_status;
+    int m_status;
     //借书人的id，如果没有，默认为Null
     std::vector<std::string> m_reader_ids;
     //图书的数量
-    unsigned int m_num;
+    int m_num;
 };
 
 #endif // BOOK_H

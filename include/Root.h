@@ -4,13 +4,11 @@
 
 class Root:public Admin
 {
-private:
-    std::string m_id;
-    std::string m_passwd;
 public:
+    Root();
     Root(std::string id,std::string passwd);
-    void logon(Admin admin);
-    void deleteAdmin(std::string adminId);
+    void logon(Admin admin,std::map<std::string,Admin> & admins);
+    void deleteAdmin(std::string adminId,std::map<std::string,Admin>  admins);
 };
 
 #endif //ROOT_A

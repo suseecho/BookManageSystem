@@ -1,13 +1,14 @@
 #include "../include/Book.h"
-Book::Book(std::string name, std::string id, double price,std::string author, bool exist,std::string reader_id)
+Book::Book(std::string name, std::string id, double price,std::string author,  unsigned int num,unsigned int status)
 {
    this->m_name        =   name;
-   this->m_id          =   id;   
+   this->m_id          =   id;
    this->m_price       =   price;
    this->m_author      =   author;
-   this->m_status      =   exist;
+   this->m_num =  num;
+   this->m_status = status;
 }
-
+ Book::Book(){}
 std::string Book::getName()
 {
     return this->m_name;
@@ -40,7 +41,8 @@ std::vector<std::string> & Book::getReaderIds()
 
 void Book::setNum(int change)
 {
-    if(-1*change > this->m_num){
+    auto temp = -change;
+    if(temp > (int)this->m_num){
         std::cout<<"改变图书数量失败:图书变化数量大于在库数量"<<std::endl;
         return;
     }
@@ -56,12 +58,12 @@ void Book::setStatus(int change)
     this->m_status += change;
 }
 
-unsigned int Book::getNum()
+int Book::getNum()
 {
     return this->m_num;
 }
 
-unsigned int Book::getStatus()
+int Book::getStatus()
 {
     return this->m_status;
 }
