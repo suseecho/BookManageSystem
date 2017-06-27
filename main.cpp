@@ -197,7 +197,38 @@ void logon()
 
 void borrow()
 {
-    std::cout << "borrow" << std::endl;
+    std::cout << "请输入读者编号: " << std::endl;
+    std::string readerId;
+    std::cin >> readerId;
+    BMSopt * ptr = BMSopt::Instance();
+    std::map<std::string,Reader> mapReader = ptr->getReader();
+    auto itReader = mapReader.begin();
+    int flagReader  = 0 ;
+    int flagBook =  0;
+    while(itReader != mapReader.end())
+    {
+        if(itReader->seconde.getId() == readerId)
+        {
+            flagReader = 1;
+            std::cout << "请输入所借图书的编号" << std::endl;
+            std::string bookId;
+            std::cin >> bookId;
+            std::map<std::string,Book> mapBook = ptr->getBook();
+            auto itBook = mapBook.begin();
+            while(itBook != mapBook.end())
+            {
+                if(itBook->second.getId() == bookId)
+                {
+                    flagBook = 1;
+                    Admin admin;
+                    admin.lendBook(
+                    
+            
+
+
+
+
+        
 }
 
 void restore()
