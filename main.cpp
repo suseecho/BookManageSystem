@@ -1,6 +1,7 @@
 #include "./include/BMSopt.h"
 #include<unistd.h>
 #define BRK()  do { ; getchar(); } while (0)
+char getch();
 void menu();
 void input();
 void mydelete();
@@ -18,7 +19,28 @@ int main()
     std::cout << "user: ";
     std::cin >> user;
     std::cout << "password: ";
-    std::cin >> pwd;
+    getchar();
+//    std::cin >> pwd;
+    int i = 0;
+    char ch;
+    char chPwd[20];
+    for(i=0;i<20;i++)
+    {
+     ch=getch();
+     if(ch=='\n')
+     {
+         chPwd[i]='\0';
+         break;
+     }
+     putchar('*');
+     chPwd[i]=ch;
+    }
+    pwd = std::string(chPwd);
+    std::cout << pwd << std::endl;
+
+
+
+        
     auto it = mapAdmin.begin();
     while(it!=mapAdmin.end())
     {
@@ -50,27 +72,27 @@ int main()
 void menu()
 {
     system("clear");
-    std::cout << "              ************************************************************************" << std::endl;
-    std::cout << "              ************************************************************************" << std::endl;
-    std::cout << "              **                                                                    **" << std::endl;
-    std::cout << "              **                                                                    **" << std::endl;
-    std::cout << "              **                  Welcome to Book Manage System                     **" << std::endl;
-    std::cout << "              **                                                                    **" << std::endl;
-    std::cout << "              **                                                                    **" << std::endl;
-    std::cout << "              **                                                                    **" << std::endl;
-    std::cout << "              **    1.输入                                                          **" << std::endl;
-    std::cout << "              **    2.查询                                                          **" << std::endl;
-    std::cout << "              **    3.删除                                                          **" << std::endl;
-    std::cout << "              **    4.注册                                                          **" << std::endl;
-    std::cout << "              **    5.借书                                                          **" << std::endl;
-    std::cout << "              **    6.还书                                                          **" << std::endl;
-    std::cout << "              **    7.退出                                                          **" << std::endl;
-    std::cout << "              **                                                                    **" << std::endl;
-    std::cout << "              **                                                                    **" << std::endl;
-    std::cout << "              **                                                                    **" << std::endl;
-    std::cout << "              **                                                                    **" << std::endl;
-    std::cout << "              ************************************************************************" << std::endl;
-    std::cout << "              ************************************************************************" << std::endl;
+    std::cout << "                            ************************************************************************" << std::endl;
+    std::cout << "                            ************************************************************************" << std::endl;
+    std::cout << "                            **                                                                    **" << std::endl;
+    std::cout << "                            **                                                                    **" << std::endl;
+    std::cout << "                            **                  Welcome to Book Manage System                     **" << std::endl;
+    std::cout << "                            **                                                                    **" << std::endl;
+    std::cout << "                            **                                                                    **" << std::endl;
+    std::cout << "                            **                                                                    **" << std::endl;
+    std::cout << "                            **    1.输入                                                          **" << std::endl;
+    std::cout << "                            **    2.查询                                                          **" << std::endl;
+    std::cout << "                            **    3.删除                                                          **" << std::endl;
+    std::cout << "                            **    4.注册                                                          **" << std::endl;
+    std::cout << "                            **    5.借书                                                          **" << std::endl;
+    std::cout << "                            **    6.还书                                                          **" << std::endl;
+    std::cout << "                            **    7.退出                                                          **" << std::endl;
+    std::cout << "                            **                                                                    **" << std::endl;
+    std::cout << "                            **                                                                    **" << std::endl;
+    std::cout << "                            **                                                                    **" << std::endl;
+    std::cout << "                            **                                                                    **" << std::endl;
+    std::cout << "                            ************************************************************************" << std::endl;
+    std::cout << "                            ************************************************************************" << std::endl;
     char ch ;
     std::cout << "你想要干什么: ";
     std::cin >> ch;
@@ -97,19 +119,41 @@ void menu()
             break;
         case '7':
             exit(2);
-    
     }
 }
 void input()
 {
-    std::cout << "输入图书信息(书名,图书编号,价格,作者,书总量,书在库量)" << std::endl;
     std::string name , id , author;
     double price;
     unsigned int num , status;
-    std::cin >> name >> id >> price >>  author >> num >> status;
-    Book book(name,id,price,author,num,status);
-    BMSopt * ptr = BMSopt::Instance();
-    ptr->addBook(book);
+    std::cout << "输入图书信息(书名,图书编号,价格,作者,书总量,书在库量)" << std::endl;
+    std::cout << "书名:";
+    std::cin >> name;
+    std::cout << "编号:";
+    std::cin >> id;
+    std::cout << "价格:";
+    std::cin >> price;
+    std::cout << "作者:";
+    std::cin >> author;
+    std::cout << "总量:";
+    std::cin >> num;
+    std::cout << "在库量:";
+    std::cin >> status;
+    if(status > num)
+    {
+        std::cout << "输入信息有误" << std::endl;
+        BRK();
+        BRK();
+    }
+    else
+    {
+        Book book(name,id,price,author,num,status);
+        BMSopt * ptr = BMSopt::Instance();
+        ptr->addBook(book);
+        std::cout <<"信息输入成功" <<std::endl;
+        BRK();
+        BRK();
+    }
     
 }
 
@@ -182,10 +226,15 @@ void mydelete()
 
 void logon()
 {
-    std::cout << "请输入读者姓名,性别,编号" << std::endl;
     std::string name , id;
     bool gender; 
-    std::cin >> name >> gender >> id;
+    std::cout << "请输入读者信息" << std::endl;
+    std::cout << "姓名:";
+    std::cin >> name;
+    std::cout << "性别(0-女,1-男):";
+    std::cin >> gender;
+    std::cout << "编号:" ;
+    std::cin >> id;
     Reader reader(name,gender,id);
     BMSopt * ptr = BMSopt::Instance();
     ptr->addReader(reader);
@@ -197,6 +246,7 @@ void logon()
 
 void borrow()
 {
+/*
     std::cout << "请输入读者编号: " << std::endl;
     std::string readerId;
     std::cin >> readerId;
@@ -223,6 +273,7 @@ void borrow()
                     Admin admin;
                     admin.lendBook(
                     
+*/
             
 
 
@@ -235,3 +286,13 @@ void restore()
 {
     std::cout << "restore" << std::endl;
 }
+char getch()
+{    
+    char c;
+    system("stty -echo");
+    system("stty -icanon");
+    c=getchar();
+    system("stty icanon");
+    system("stty echo");
+    return c;
+}    
